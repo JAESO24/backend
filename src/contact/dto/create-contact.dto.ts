@@ -1,19 +1,23 @@
-// src/contact/dto/create-contact.dto.ts
-import { IsEmail, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateContactDto {
-    @IsNotEmpty()
+    @IsString()
+    @IsNotEmpty({ message: 'Le nom est obligatoire' })
     name: string;
 
-    @IsEmail()
+    @IsEmail({}, { message: 'Email invalide' })
+    @IsNotEmpty({ message: 'L’email est obligatoire' })
     email: string;
 
+    @IsString()
     @IsOptional()
     phone?: string;
 
-    @IsNotEmpty()
+    @IsString()
+    @IsNotEmpty({ message: 'Le sujet est obligatoire' })
     subject: string;
 
-    @IsNotEmpty()
+    @IsString()
+    @IsNotEmpty({ message: 'Le message est obligatoire' })
     message: string;
 }
